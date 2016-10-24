@@ -5,6 +5,12 @@ namespace FrontEndBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Class CommentController
+ *
+ * @package FrontEndBundle\Controller
+ * @Route("/")
+ */
 class DefaultController extends Controller
 {
     /**

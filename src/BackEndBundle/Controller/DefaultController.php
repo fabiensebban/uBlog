@@ -5,6 +5,13 @@ namespace BackEndBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Class DefaultController
+ *
+ * @package BackEndBundle\Controller
+ * @Route("/backoffice")
+ *
+ */
 class DefaultController extends Controller
 {
     /**

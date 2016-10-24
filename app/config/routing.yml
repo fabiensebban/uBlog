@@ -1,15 +1,9 @@
 back_end:
     resource: "@BackEndBundle/Controller/"
     type:     annotation
-    prefix:   /
 
 front_end:
     resource: "@FrontEndBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-app:
-    resource: "@AppBundle/Controller/"
     type:     annotation
 
 #FOSUser routing
