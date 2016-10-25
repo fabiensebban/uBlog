@@ -34,6 +34,12 @@ class Post
     protected $author;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $category;
+
+    /**
      * @ORM\OneToMany(targetEntity="Post", mappedBy="comment")
      */
     protected $comment;
@@ -192,6 +198,24 @@ class Post
     public function getAuthor()
     {
         return $this->author;
+    }
+    /**
+     * Set category
+     *
+     * @param integer $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+    /**
+     * Get category
+     *
+     * @return integer
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
     /**
      * Set image
