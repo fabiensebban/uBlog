@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
- * Class CommentController
+ * Class DefaultController
  *
  * @package FrontEndBundle\Controller
  * @Route("/")
@@ -18,6 +18,11 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('FrontEndBundle:Default:index.html.twig');
+        $categories = $this->getDoctrine()
+                    ->getRepository("AppBundle:Category")
+                    ->findAll();
+
+        return $this->render('FrontEndBundle:Default:index.html.twig', array('categories' => $categories));
     }
+
 }
