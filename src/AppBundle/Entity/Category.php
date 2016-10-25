@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
@@ -32,6 +33,11 @@ class Category
     protected $nameId;
 
     /**
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="category")
+     */
+    protected  $post;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $created;
@@ -45,6 +51,7 @@ class Category
     {
         $this->setCreated(new \DateTime());
         $this->setUpdated(new \DateTime());
+        $this->post = new ArrayCollection();
     }
 
     /**
@@ -113,6 +120,15 @@ class Category
     public function setNameId($nameId)
     {
         $this->nameId = $nameId;
+    }
+    /**
+     * Get posts
+     *
+     * @return string
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
     /**
      * Set created
