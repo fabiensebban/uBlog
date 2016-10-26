@@ -35,7 +35,7 @@ class Category
     /**
      * @ORM\OneToMany(targetEntity="Post", mappedBy="category")
      */
-    protected  $post;
+    protected  $posts;
 
     /**
      * @ORM\Column(type="datetime")

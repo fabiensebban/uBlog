@@ -34,8 +34,8 @@ class Post
     protected $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="post")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     protected $category;
 

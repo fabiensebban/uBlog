@@ -21,15 +21,15 @@
                                 <!-- All posts-->
 
                                 {# TODO : While on categorie's posts #}
-                               {# {% for post in category.posts %} #}
+                                {% for post in category.posts %}
                                     <div class="item active">
                                         <div class="col-xs-4">
-                                            <a href="{# TODO : Post's slug URL #}">
+                                            <a href="{{ absolute_url(path('show_post', {'id' : post.id, 'slug' : post.slug})) }}">
                                                 <img src="{# TODO: Image URL #}" class="img-responsive">
                                             </a>
                                         </div>
                                     </div>
-                            {# {% endfor %} #}
+                            {% endfor %}
                             </div>
                             <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
                             <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
