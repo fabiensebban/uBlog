@@ -23,13 +23,13 @@ class Comment
     protected $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $author;
 
     /**
-     * @ORM\OneToOne(targetEntity="Post")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Post")
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
     protected $post;

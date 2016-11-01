@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository")
@@ -19,28 +21,36 @@ class Post
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank()
      */
     protected $title;
 
     /**
      * @ORM\Column(type="text")
+     *
+     * @Assert\NotBlank()
      */
     protected $body;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
+     *
+     * @Assert\NotNull()
      */
     protected $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     *
+     * @Assert\NotNull()
      */
     protected $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="comment")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="comment")
      */
     protected $comment;
 
@@ -55,14 +65,24 @@ class Post
     protected $isApproved;
 
     /**
+     * @Gedmo\Slug(fields={"title"}, updatable=false, separator="-")
      * @ORM\Column(type="string")
+     *
+     * @Assert\NotNull()
      */
     protected $slug;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @var Media
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(name="image", referencedColumnName="id")
+     * })
+     *
+     * @Assert\NotNull()
      */
-    protected $image;
+    private $image;
 
     /**
      * @ORM\Column(type="text")
