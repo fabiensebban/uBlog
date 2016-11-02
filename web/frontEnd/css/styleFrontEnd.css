@@ -1,0 +1,12 @@
+header {
+    min-height: 70px !important;
+}
+
+.containerBlocBody {
+    min-height: 300px;
+    padding-top: 4%;
+}
+
+.loginForm {
+    margin-top: 12%;
+}
