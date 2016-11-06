@@ -34,15 +34,15 @@ class Post
     protected $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     protected $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="comment")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
      */
-    protected $comment;
+    protected $comments;
 
     /**
      * @ORM\Column(type="boolean")
