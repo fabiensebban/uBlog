@@ -73,12 +73,9 @@ class Post
     protected $slug;
 
     /**
-     * @var Media
+     * @var Image
      *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(name="image", referencedColumnName="id")
-     * })
+     * @ORM\Column(type="text")
      *
      * @Assert\NotNull()
      */

@@ -48,27 +48,29 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="exampleModalLabel">{{ 'new_post_title'|trans }}</h4>
                 </div>
+                {{ form_start(post, {'action': action, 'method': 'POST'}) }}
                 <div class="modal-body">
-                    <form>
-                        <!--
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label">{{ 'post_title'|trans }}</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="control-label">{{ 'post_message'|trans  }}</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                        -->
-                        {{ form_start(post) }}
-                        {{ form_widget(post) }}
-                        {{ form_end(post) }}
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
-                </div>
+
+                    <!--
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">{{ 'post_title'|trans }}</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">{{ 'post_message'|trans  }}</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                    -->
+                    {{ form_row(post.title, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_row(post.body, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_row(post.image, { 'attr': {'class': 'form-control'} }) }}
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send message</button>
+                    </div>
+                {{ form_end(post) }}
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ namespace FrontEndBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class CommentController
@@ -37,6 +38,37 @@ class PostController extends Controller
                 'post'      => $post,
                 'comments'  => $comments
             ));
+    }
+
+    /**
+     * @Route(
+     *      "/post/new",
+     *      name="new_post"
+     * )
+     *  @Method({"POST"})
+     */
+    public function newAction(Request $request)
+    {
+        $post = $this->createFormBuilder()
+            ->add('title')
+            ->add('body')
+            ->addx('category')
+            ->add('image')
+            ->getForm();
+
+        $post->handleRequest($request);
+
+
+        if ($post->isSubmitted() && $post->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+        }
+        else
+        {
+            var_dump("error: " . $post);
+        }
     }
 
 }

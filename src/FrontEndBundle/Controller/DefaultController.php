@@ -29,17 +29,19 @@ class DefaultController extends Controller
             $post = $this->createFormBuilder()
                 ->add('title')
                 ->add('body')
-                ->add('image', 'sonata_media_type', array(
-                        'provider' => 'sonata.media.provider.image',
-                        'context'  => 'default'
-                    ))
-                ->add('save', SubmitType::class)
+                ->add('image')
+                ->add('category')
+                //->add('unlink', 'hidden', array(
+                //        'mapped'   => false,
+                //        'data'     => false,
+                //        'required' => false
+                //    ))
+                //->add('save', SubmitType::class)
                 ->getForm();
 
-            return $this->render('FrontEndBundle:Default:index.html.twig', array('categories' => $categories, 'post' => $post->createView()));
+            return $this->render('FrontEndBundle:Default:index.html.twig', array('categories' => $categories, 'post' => $post->createView(), 'action' => $this->generateUrl('new_post')));
         }
 
         return $this->render('FrontEndBundle:Default:index.html.twig', array('categories' => $categories, 'post' => ''));
     }
-
 }
