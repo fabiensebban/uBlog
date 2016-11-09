@@ -39,6 +39,7 @@ class DefaultController extends Controller
                 //->add('save', SubmitType::class)
                 ->getForm();
 
+
             return $this->render('FrontEndBundle:Default:index.html.twig', array('categories' => $categories, 'post' => $post->createView(), 'action' => $this->generateUrl('new_post')));
         }
 

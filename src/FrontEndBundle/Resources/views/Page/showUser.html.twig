@@ -1,0 +1,37 @@
+{% extends "FrontEndBundle::baseFront.html.twig" %}
+
+{% block title %}FrontEndBundle:Page:about{% endblock %}
+
+{% block body %}
+    <h1 class="profileTitle">Profile page</h1>
+    <div class="row">
+        <div class="col-lg-5 col-xs-5 col-md-5 blocInfoPost">
+            <div class="thumbnail">
+                <div class="col-lg-7 col-md-7 col-xs-7 col-lg-offset-4 col-md-offset-4 blocGlyphicon">
+                    <span class="glyphicon glyphicon-user"></span>
+                </div>
+                <div class="caption text-center">
+                    <h3>User Name</h3>
+                    <p>exemple@gmail.com</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Gérer mon compte</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7 col-xs-7 col-md-7 blocInfoPost">
+            <div class="thumbnail">
+                <div>
+
+                </div>
+                <div class="caption">
+                    <span class="glyphicon glyphicon-list-alt"> </span>
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <div class="row">
+                        <p class="text-center col-lg-6 col-md-6 col-xs-6 nbPost">46 Posts</p>
+                        <p class="text-center col-lg-5 col-md-5 col-xs-5 nbComment">134 commentaires</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
