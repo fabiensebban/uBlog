@@ -80,9 +80,12 @@ class PageController extends Controller
     {
         $request = $this->container->get('request');
         $routeName = $request->get('_route');
+        $resultPosts = $this->getDoctrine()->getRepository('AppBundle\Entity\Post')->findAll();
+        $resultCategory = $this->getDoctrine()->getRepository('AppBundle\Entity\Category')->findAll();
 
         return $this->render('FrontEndBundle:Page:listPost.html.twig', array(
-            'routeName' => $routeName
+            'allPosts' => $resultPosts,
+            'allCategory' => $resultCategory
         ));
     }
 }
