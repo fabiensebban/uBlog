@@ -1,6 +1,6 @@
 <?php
 
-namespace FrontEndBundle\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 /**
  * Class CommentController
  *
- * @package FrontEndBundle\Controller
+ * @package AppBundle\Controller
  * @Route("/")
  */
 class CommentController extends Controller
@@ -20,7 +20,7 @@ class CommentController extends Controller
      */
     public function createAction()
     {
-        return $this->render('FrontEndBundle:Comment:create.html.twig', array(
+        return $this->render('AppBundle:Comment:create.html.twig', array(
             // ...
         ));
     }
@@ -31,7 +31,7 @@ class CommentController extends Controller
      */
     public function likeAction($id)
     {
-        return $this->render('FrontEndBundle:Comment:like.html.twig', array(
+        return $this->render('AppBundle:Comment:like.html.twig', array(
             // ...
         ));
     }
@@ -42,7 +42,7 @@ class CommentController extends Controller
      */
     public function shareAction($id)
     {
-        return $this->render('FrontEndBundle:Comment:share.html.twig', array(
+        return $this->render('AppBundle:Comment:share.html.twig', array(
             // ...
         ));
     }

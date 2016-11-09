@@ -3,7 +3,7 @@ back_end:
     type:     annotation
 
 front_end:
-    resource: "@FrontEndBundle/Controller/"
+    resource: "@AppBundle/Controller/"
     type:     annotation
 
 #FOSUser routing

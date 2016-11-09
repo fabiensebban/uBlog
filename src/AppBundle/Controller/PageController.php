@@ -1,6 +1,6 @@
 <?php
 
-namespace FrontEndBundle\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 /**
  * Class CommentController
  *
- * @package FrontEndBundle\Controller
+ * @package AppBundle\Controller
  * @Route("/")
  */
 class PageController extends Controller
@@ -24,7 +24,7 @@ class PageController extends Controller
         $request = $this->container->get('request');
         $routeName = $request->get('_route');
         $categories = $this->getDoctrine()->getRepository("AppBundle:Category")->findAll();
-        return $this->render('FrontEndBundle:Page:index.html.twig', array(
+        return $this->render('AppBundle:Page:index.html.twig', array(
             'categories' => $categories,
             'routeName' => $routeName
         ));
@@ -39,7 +39,7 @@ class PageController extends Controller
         $request = $this->container->get('request');
         $routeName = $request->get('_route');
 
-        return $this->render('FrontEndBundle:Page:about.html.twig', array(
+        return $this->render('AppBundle:Page:about.html.twig', array(
             'routeName' => $routeName
         ));
     }
@@ -53,7 +53,7 @@ class PageController extends Controller
         $request = $this->container->get('request');
         $routeName = $request->get('_route');
 
-        return $this->render('FrontEndBundle:Page:contact.html.twig', array(
+        return $this->render('AppBundle:Page:contact.html.twig', array(
             'routeName' => $routeName
         ));
     }
@@ -67,7 +67,7 @@ class PageController extends Controller
         $request = $this->container->get('request');
         $routeName = $request->get('_route');
 
-        return $this->render('FrontEndBundle:Page:showUser.html.twig', array(
+        return $this->render('AppBundle:Page:showUser.html.twig', array(
             'routeName' => $routeName
         ));
     }
@@ -81,7 +81,7 @@ class PageController extends Controller
         $resultPosts = $this->getDoctrine()->getRepository('AppBundle\Entity\Post')->findAll();
         $resultCategory = $this->getDoctrine()->getRepository('AppBundle\Entity\Category')->findAll();
 
-        return $this->render('FrontEndBundle:Page:listPost.html.twig', array(
+        return $this->render('AppBundle:Page:listPost.html.twig', array(
             'allPosts' => $resultPosts,
             'allCategory' => $resultCategory
         ));
@@ -96,7 +96,7 @@ class PageController extends Controller
         $resultPost = $this->getDoctrine()->getRepository('AppBundle\Entity\Post')->find($id);
         $resultCategory = $this->getDoctrine()->getRepository('AppBundle\Entity\Category')->findAll();
 
-        return $this->render('FrontEndBundle:Page:detailsPost.html.twig', array(
+        return $this->render('AppBundle:Page:detailsPost.html.twig', array(
             'detailsPost' => $resultPost,
             'allCategory' => $resultCategory
         ));
