@@ -78,13 +78,26 @@ class PageController extends Controller
      */
     public function listpostAction()
     {
-        $request = $this->container->get('request');
-        $routeName = $request->get('_route');
         $resultPosts = $this->getDoctrine()->getRepository('AppBundle\Entity\Post')->findAll();
         $resultCategory = $this->getDoctrine()->getRepository('AppBundle\Entity\Category')->findAll();
 
         return $this->render('FrontEndBundle:Page:listPost.html.twig', array(
             'allPosts' => $resultPosts,
+            'allCategory' => $resultCategory
+        ));
+    }
+
+    /**
+     * @Route("/details/{id}", requirements={"id": "\d+"})
+     * @Method({"GET"})
+     */
+    public function detailsAction($id)
+    {
+        $resultPost = $this->getDoctrine()->getRepository('AppBundle\Entity\Post')->find($id);
+        $resultCategory = $this->getDoctrine()->getRepository('AppBundle\Entity\Category')->findAll();
+
+        return $this->render('FrontEndBundle:Page:detailsPost.html.twig', array(
+            'detailsPost' => $resultPost,
             'allCategory' => $resultCategory
         ));
     }
