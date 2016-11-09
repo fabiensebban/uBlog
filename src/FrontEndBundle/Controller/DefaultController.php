@@ -21,8 +21,9 @@ class DefaultController extends Controller
         $categories = $this->getDoctrine()
                     ->getRepository("AppBundle:Category")
                     ->findAll();
-
-        return $this->render('FrontEndBundle:Default:index.html.twig', array('categories' => $categories));
+        $request = $this->container->get('request');
+        $routeName = $request->get('_route');
+        return $this->render('FrontEndBundle:Default:index.html.twig', array('categories' => $categories, 'routeName'=> $routeName));
     }
 
 }
