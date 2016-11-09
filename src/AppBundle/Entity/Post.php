@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository")
@@ -60,9 +61,12 @@ class Post
     protected $slug;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Please, upload the post image.")
+     * @Assert\File(mimeTypes={ "image/png", "image/jpg", "image/jpeg" })
      */
-    protected $image;
+    private $image;
 
     /**
      * @ORM\Column(type="text")
@@ -91,6 +95,8 @@ class Post
 
     public function __construct()
     {
+        $this->setLikes(0);
+        $this->setShares(0);
         $this->setCreated(new \DateTime());
         $this->setUpdated(new \DateTime());
     }
