@@ -71,4 +71,18 @@ class PageController extends Controller
             'routeName' => $routeName
         ));
     }
+
+    /**
+     * @Route("/list_post")
+     * @Method({"GET"})
+     */
+    public function listpostAction()
+    {
+        $request = $this->container->get('request');
+        $routeName = $request->get('_route');
+
+        return $this->render('FrontEndBundle:Page:listPost.html.twig', array(
+            'routeName' => $routeName
+        ));
+    }
 }
