@@ -42,7 +42,8 @@ class Post
     protected $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
+
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      *
      * @Assert\NotNull()
@@ -50,9 +51,9 @@ class Post
     protected $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="comment")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
      */
-    protected $comment;
+    protected $comments;
 
     /**
      * @ORM\Column(type="boolean")
@@ -73,11 +74,11 @@ class Post
     protected $slug;
 
     /**
-     * @var Image
+
+     * @ORM\Column(type="string")
      *
-     * @ORM\Column(type="text")
-     *
-     * @Assert\NotNull()
+     * @Assert\NotBlank(message="Please, upload the post image.")
+     * @Assert\File(mimeTypes={ "image/png", "image/jpg", "image/jpeg" })
      */
     private $image;
 
@@ -108,6 +109,8 @@ class Post
 
     public function __construct()
     {
+        $this->setLikes(0);
+        $this->setShares(0);
         $this->setCreated(new \DateTime());
         $this->setUpdated(new \DateTime());
     }

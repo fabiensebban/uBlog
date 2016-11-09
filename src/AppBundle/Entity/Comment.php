@@ -29,7 +29,7 @@ class Comment
     protected $author;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Post")
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
     protected $post;

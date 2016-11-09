@@ -1,0 +1,18 @@
+{% extends "BackEndBundle::base.html.twig" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+	<h1>Welcome to the post page : {{ post.title }}</h1>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="{{ 'form.submit'|trans }}" />
+    </div>
+{{ form_end(form) }}
+
+	{# {{ form(form) }} #}
+
+	{# {{ form_row(form.isApproved) }} #}
+{% endblock %}
