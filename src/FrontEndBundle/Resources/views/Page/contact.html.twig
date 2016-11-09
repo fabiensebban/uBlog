@@ -3,5 +3,30 @@
 {% block title %}FrontEndBundle:Page:contact{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Page:contact page</h1>
+    <div class="tab-content">
+        <div id="login" class="tab-pane fade in active">
+            <div class="login-inner">
+                <div class="title">
+                    <h1>Contact <span>us!</span></h1>
+                </div>
+                <div class="login-form">
+                    <form>
+                        <div class="form-details">
+                            <label class="user">
+                                <input type="text" name="username" placeholder="Username" id="username">
+                            </label>
+                            <label class="pass">
+                                <input type="text" name="email" placeholder="E-mail" id="email">
+                            </label>
+                            <label class="pass">
+                                <input type="text" name="objet" placeholder="Objet" id="objet">
+                            </label>
+
+                        </div>
+                        <button type="submit" class="form-btn" onsubmit="">Sent</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

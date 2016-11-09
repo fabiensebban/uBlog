@@ -62,6 +62,20 @@
                     <a href="/app_dev.php/contact">Contact</a>
                 </li>
 
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}" class="btnLogout">
+                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/app_dev.php/profile">Mon Profile</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -71,26 +85,11 @@
 
 <!-- Header -->
 <header>
-    {% if(routeName == 'frontend_default_index') %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <img class="img-responsive img-cover" src="{{ asset('frontEnd/images/profil.png') }}" alt="">
-                <div class="intro-text">
-                    <span class="name">{{ 'title'|trans }}</span>
-                    <hr class="star-light">
-                    <span class="skills"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
+    {%  block header %} {% endblock %}
 </header>
-{% if(routeName != 'frontend_default_index') %}
 <div class="container-fluid containerBlocBody">
     {% block body %}{% endblock %}
 </div>
-{% endif %}
 <div class="quick-access-buttons">
     <div class="user-profile-btn">
         <a href="{{ path('fos_user_profile_show') }}">

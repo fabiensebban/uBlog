@@ -65,8 +65,8 @@ class PageController extends Controller
     public function showprofileAction()
     {
         $request = $this->container->get('request');
-        $routeName = $request->get('_route');iiii~H¨
-o
+        $routeName = $request->get('_route');
+
         return $this->render('FrontEndBundle:Page:showUser.html.twig', array(
             'routeName' => $routeName
         ));
