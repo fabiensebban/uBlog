@@ -350,3 +350,18 @@ span.glyphicon.glyphicon-user {
         width: 100%;
     }
 }
+
+.blocPost{
+    height: auto;
+    margin-bottom: 8%;
+    padding-bottom: 3%;
+}
+
+.textPreview{
+    font-size: 14px;
+}
+
+.lead, .datePost{
+    font-size: 18px;
+}
+

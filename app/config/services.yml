@@ -13,3 +13,17 @@ services:
         class: AppBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
+
+    #UploadFile service
+    app.image_uploader:
+        class: AppBundle\Services\FileUploader
+        arguments: ['%images_directory%']
+
+    #Doctrine Post Listener service
+    app.doctrine_post_listener:
+            class: AppBundle\EventListener\FileUploadListener
+            arguments: ['@app.image_uploader', '%images_directory%']
+            tags:
+                - { name: doctrine.event_listener, event: prePersist }
+                - { name: doctrine.event_listener, event: preUpdate }
+                - { name: doctrine.event_listener, event: postLoad }

@@ -2,20 +2,47 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use AppBundle\Entity\Post;
 
+
+/**
+ * Class DefaultController
+ *
+ * @package AppBundle\Controller
+ * @Route("/")
+ */
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ));
+        $categories = $this->getDoctrine()
+                    ->getRepository("AppBundle:Category")
+                    ->findAll();
+
+        if ($this->container->get('security.context')->getToken()->getUser()) {
+            $post = $this->createFormBuilder()
+                ->add('title')
+                ->add('body')
+                ->add('image')
+                ->add('category')
+                //->add('unlink', 'hidden', array(
+                //        'mapped'   => false,
+                //        'data'     => false,
+                //        'required' => false
+                //    ))
+                //->add('save', SubmitType::class)
+                ->getForm();
+
+
+            return $this->render('AppBundle:Default:index.html.twig', array('categories' => $categories, 'post' => $post->createView(), 'action' => $this->generateUrl('new_post')));
+        }
+
+        return $this->render('AppBundle:Default:index.html.twig', array('categories' => $categories, 'post' => ''));
     }
 }
