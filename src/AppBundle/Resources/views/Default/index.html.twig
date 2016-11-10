@@ -1,0 +1,84 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+
+    <!-- Blogs Grid Section -->
+
+    {# TODO : While on all categories and all blogs #}
+    {% for category in categories %}
+        <section id="{{ category.nameId }}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2>{{ category.displayName }}</h2>
+                        <hr class="star-primary">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="carousel slide multi-item-carousel" id="theCarousel">
+                            <div class="carousel-inner">
+                                <!-- All posts-->
+
+                            {% for post in category.posts %}
+                                <div class="item active">
+                                    <div class="col-xs-4">
+                                        <a href="{{ absolute_url(path('show_post', {'id' : post.id, 'slug' : post.slug})) }}">
+                                            <img src="{# TODO: Image URL #}" class="img-responsive">
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </div>
+                            <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                            <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+
+    <!-- Create post button -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal" data-whatever="@mdo">{{ 'add_post'|trans }}</button>
+    <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">{{ 'new_post_title'|trans }}</h4>
+                </div>
+                {{ form_start(post, {'action': action, 'method': 'POST'}) }}
+                <div class="modal-body">
+
+                    <!--
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">{{ 'post_title'|trans }}</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">{{ 'post_message'|trans  }}</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                    -->
+                    {{ form_row(post.title, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_row(post.body, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_row(post.image, { 'attr': {'class': 'form-control'} }) }}
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send message</button>
+                    </div>
+                {{ form_end(post) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script type="application/javascript">
+        $('#postModal').modal();
+    </script>
+{% endblock %}
