@@ -50,3 +50,24 @@
 # PHP Storm
 .idea
 .idea/*
+npm-debug.log
+src/AppBundle/EventListener/FileUploadListener.php
+src/AppBundle/Resources/translations/messages.en.php
+src/AppBundle/Resources/translations/messages.fr.php
+src/AppBundle/Resources/views/Default/index.html.twig
+src/AppBundle/Resources/views/Page/detailsPost.html.twig
+src/AppBundle/Resources/views/Page/listPost.html.twig
+src/AppBundle/Resources/views/Post/show.html.twig
+src/AppBundle/Services/FileUploader.php
+src/BackEndBundle/Controller/PostController.php
+src/BackEndBundle/DataFixtures/ORM/CategoryFixtures.php
+src/BackEndBundle/DataFixtures/ORM/CommentFixtures.php
+src/BackEndBundle/DataFixtures/ORM/PostFixtures.php
+src/BackEndBundle/DataFixtures/ORM/UserFixtures.php
+src/BackEndBundle/Form/Type/PostType.php
+src/BackEndBundle/Repository/PostRepository.php
+src/BackEndBundle/Resources/views/base.html.twig
+src/BackEndBundle/Resources/views/Post/add.html.twig
+src/BackEndBundle/Resources/views/Post/show.html.twig
+src/BackEndBundle/Tests/Controller/PostControllerTest.php
+web/backEnd/css/bo_style.css
