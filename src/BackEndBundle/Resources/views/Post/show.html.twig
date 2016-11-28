@@ -7,9 +7,13 @@
 
 {{ form_start(form) }}
     {{ form_widget(form) }}
+    <dir>
+    	<img src="{{ asset(images_dir) }}{{post.image.fileName}}" alt="{{ post.title }}"  />
+    </dir>
     <div>
-        <input type="submit" value="{{ 'form.submit'|trans }}" />
+        <input type="submit"/>
     </div>
+
 {{ form_end(form) }}
 
 	{# {{ form(form) }} #}

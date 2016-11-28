@@ -28,8 +28,9 @@ class PostController extends Controller
     {
     	$em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('AppBundle:Post')->findOneById($id);
-
-        $form = $this->createForm(new PostType(), $post, array(
+        $img = $post->getImage();
+        //var_dump($img->getPathName());die();
+        $form = $this->createForm(PostType::class, $post, array(
 	        'action' => $this->generateUrl('bo_show_post', array('id' => $id)),
 	        'method' => 'PUT'
     	));
