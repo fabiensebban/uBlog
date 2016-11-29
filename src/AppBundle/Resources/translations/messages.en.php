@@ -10,6 +10,10 @@ return array(
     'by' => 'By',
     'postedOn' => 'Posted on ',
     'blogCategories' => 'Blog categories',
-    'blogSearch' => 'Blog Search'
-
+    'blogSearch' => 'Blog Search',
+    'about' => 'ABOUT',
+    'contact' => 'CONTACT',
+    'close' => 'Close',
+    'send_message' => 'Send message',
+    'my_profil' =>'My profil'
 );

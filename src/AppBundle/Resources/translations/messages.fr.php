@@ -10,5 +10,10 @@ return array(
     'by' => 'Par',
     'postedOn' => 'Posté le ',
     'blogCategories' => 'Blogs par catégories',
-    'blogSearch' => 'Rechercher blog'
+    'blogSearch' => 'Rechercher blog',
+    'about' => 'A PROPOS',
+    'contact' => 'CONTACT',
+    'close' => 'Fermer',
+    'send_message' => 'Envoyer message',
+    'my_profil' => 'Mon profil'
 );

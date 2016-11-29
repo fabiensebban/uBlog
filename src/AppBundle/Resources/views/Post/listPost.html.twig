@@ -11,19 +11,19 @@
                 <div class="col-md-8 col-lg-8 blocPost">
                     <!-- First Blog Post -->
                     {% for post in allPosts %}
-                    <h4>
-                        <a href="/app_dev.php/details/{{ post.getId() }}">{{ post.getTitle() }}</a>
-                    </h4>
-                    <p class="lead">
-                        by <a href="index.php">{{ post.getAuthor() }}</a>
-                    </p>
-                    <p class="datePost"><span class="glyphicon glyphicon-time"></span> Posted on {{ post.getUpdated()|date('d-m-Y H:i:s') }} </p>
-                    <hr>
-                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                    <hr>
-                    <p class="textPreview">{{ post.getBody() | striptags | slice(0, 250) }} [...]</p>
-                    <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <hr>
+                        <h4>
+                            <a href="#" style="text-decoration: none; cursor: default;">{{ post.getTitle() }}</a>
+                        </h4>
+                        <p class="lead">
+                            {{ 'by'|trans }} <a href="#" style="text-decoration: none; cursor: default;">{{ post.getAuthor() }}</a>
+                        </p>
+                        <p class="datePost"><span class="glyphicon glyphicon-time"></span> {{ 'postedOn'|trans }} {{ post.getUpdated()|date('d-m-Y H:i:s') }} </p>
+                        <hr>
+                        <img src="{{ asset(images_dir) }}{{post.image.fileName}}" class="img-responsive">
+                        <hr>
+                        <p class="textPreview">{{ post.getBody() | striptags | slice(0, 250) }} [...]</p>
+                        <a class="btn btn-primary" href="{{ absolute_url(path('show_post', {'id' : post.id, 'slug' : post.slug})) }}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <hr>
                     {% endfor %}
                 </div>
 
@@ -51,8 +51,8 @@
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
                                 {% for category in allCategory %}
-                                <li><a href="#">{{ category.getDisplayName() }}</a>
-                                </li>
+                                    <li><a href="#">{{ category.getDisplayName() }}</a>
+                                    </li>
                                 {% endfor %}
                             </ul>
                         </div>
