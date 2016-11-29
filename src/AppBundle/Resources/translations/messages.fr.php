@@ -7,4 +7,8 @@ return array(
     'new_post_title' => 'Nouveau post',
     'post_title' => 'Titre: ',
     'post_body' => 'Corps: ',
+    'by' => 'Par',
+    'postedOn' => 'Posté le ',
+    'blogCategories' => 'Blogs par catégories',
+    'blogSearch' => 'Rechercher blog'
 );

@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Post;
+use AppBundle\Form\Type\PostType;
 
 /**
  * Class CommentController
@@ -26,48 +28,57 @@ class PostController extends Controller
     public function showAction($id, $slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository('AppBundle:post')->find($id);
+        $post = $em->getRepository('AppBundle:Post')->find($id);
         if (!$post) {
             throw $this->createNotFoundException('Unable to find post.');
         }
-
+/*
         $comments = $em->getRepository('AppBundle:Comment')
-            ->getCommentsForBlog($post->getId());
+                        ->getCommentsForBlog($post->getId());
+*/
+        $categories = $this->getDoctrine()
+            ->getRepository("AppBundle:Category")
+            ->findAll();
 
         return $this->render('AppBundle:Post:show.html.twig', array(
-                'post'      => $post,
-                'comments'  => $comments
+                'post'          => $post,
+                'allCategories' => $categories,
+                //'comments'  => $comments
             ));
     }
 
     /**
      * @Route(
-     *      "/post/new",
-     *      name="new_post"
+     *      "/post/add",
+     *      name="add_post"
      * )
      *  @Method({"POST"})
      */
-    public function newAction(Request $request)
+    public function addAction(Request $request)
     {
-        $post = $this->createFormBuilder()
-            ->add('title')
-            ->add('body')
-            ->addx('category')
-            ->add('image')
-            ->getForm();
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.context')->getToken()->getUser();
 
-        $post->handleRequest($request);
+        $post = new Post();
+        $post->setAuthor($user);
 
+        //By default, A post is not published but it's approved.
+        //Nobody except the admin can access to a not approved post
+        $post->setIsPublished(false);
+        $post->setIsApproved(true);
 
-        if ($post->isSubmitted() && $post->isValid())
-        {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($post);
-            $em->flush();
-        }
-        else
-        {
-            var_dump("error: " . $post);
+        $form = $this->createForm(new PostType(), $post);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $em->persist($post);
+                $em->flush();
+
+                return $this->redirectToRoute('show_post', array('id' => $post->getId(), 'slug' => $post->getSlug()));
+            }
         }
     }
 
