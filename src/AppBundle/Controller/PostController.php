@@ -82,4 +82,23 @@ class PostController extends Controller
         }
     }
 
+    /**
+     * @Route("/list_post/{id_category}")
+     * @Method({"GET"})
+     */
+    public function categoryPostListAction($id_category)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $resultPosts = $em->getRepository('AppBundle:Post')
+                          ->getPostsByCategory($id_category);
+        $resultCategory = $em->getRepository('AppBundle:Category')
+                             ->getCategories();
+
+        return $this->render('AppBundle:Post:listPost.html.twig', array(
+                'allPosts' => $resultPosts,
+                'allCategory' => $resultCategory
+            ));
+    }
+
 }

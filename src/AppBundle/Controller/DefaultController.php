@@ -18,13 +18,16 @@ use AppBundle\Repository\CategoryRepository as Category;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route(
+     *      "/",
+     *      name="home")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-            $categories = $em->getRepository('AppBundle:Category')
-                                ->getCategories();
+
+        $categories = $em->getRepository('AppBundle:Category')
+                         ->getCategories();
 
         if ($this->container->get('security.context')->getToken()->getUser()) {
 

@@ -15,7 +15,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class PageController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route(
+     *      "/",
+     *      name="add_post"
+     * )
      * @Method({"GET"})
      */
 
@@ -31,7 +34,9 @@ class PageController extends Controller
     }
 
     /**
-     * @Route("/about")
+     * @Route(
+     *      "/about",
+     *      name="about")
      * @Method({"GET"})
      */
     public function aboutAction()
@@ -45,7 +50,9 @@ class PageController extends Controller
     }
 
     /**
-     * @Route("/contact")
+     * @Route(
+     *      "/contact",
+     *      name="contact")
      * @Method({"GET"})
      */
     public function contactAction()
@@ -72,20 +79,6 @@ class PageController extends Controller
         ));
     }
 
-    /**
-     * @Route("/list_post")
-     * @Method({"GET"})
-     */
-    public function listpostAction()
-    {
-        $resultPosts = $this->getDoctrine()->getRepository('AppBundle\Entity\Post')->findAll();
-        $resultCategory = $this->getDoctrine()->getRepository('AppBundle\Entity\Category')->findAll();
-
-        return $this->render('AppBundle:Page:listPost.html.twig', array(
-            'allPosts' => $resultPosts,
-            'allCategory' => $resultCategory
-        ));
-    }
 
     /**
      * @Route("/details/{id}", requirements={"id": "\d+"})
