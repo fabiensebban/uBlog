@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
-    public function getCategories()
+    public function getCategoriesWithPublicPost()
     {
 
         return $this->createQueryBuilder('c')
@@ -22,6 +22,13 @@ class CategoryRepository extends EntityRepository
                     ->andWhere('p.isApproved = true')
                     ->getQuery()
                     ->getResult();
+
+    }
+
+    public function getCategoryById($id_category)
+    {
+
+        return $this->findBy(array('id' => $id_category));
 
     }
 }

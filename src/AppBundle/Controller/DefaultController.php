@@ -27,7 +27,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $categories = $em->getRepository('AppBundle:Category')
-                         ->getCategories();
+                         ->getCategoriesWithPublicPost();
 
         if ($this->container->get('security.context')->getToken()->getUser()) {
 

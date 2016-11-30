@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h2>{{ category.displayName }}</h2>
+                        <h2><a href="{{ path('list_post', {'id_category': category.id}) }}" style="color: #2C3E50; cursor: pointer">{{ category.displayName }}</a></h2>
                         <hr class="star-primary">
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                             {% for post in category.posts %}
                                 {% if post.isApproved and post.isPublished %}
                                <li>
-                                   <a href="{{ absolute_url(path('show_post', {'id' : post.id, 'slug' : post.slug})) }}">
+                                   <a href="{{ absolute_url(path('show_post', {'id' : post.id, 'slug' : post.slug})) }}" >
                                        <img src="{{ asset(images_dir) }}{{post.image.fileName}}" class="img-responsive">
                                    </a>
                                </li>
