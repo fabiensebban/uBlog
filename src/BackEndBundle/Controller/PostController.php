@@ -28,11 +28,11 @@ class PostController extends Controller
     {
     	$em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('AppBundle:Post')->findOneById($id);
-        $img = $post->getImage();
-        //var_dump($img->getPathName());die();
+
         $form = $this->createForm(PostType::class, $post, array(
-	        'action' => $this->generateUrl('bo_show_post', array('id' => $id)),
-	        'method' => 'PUT'
+	        'action' => $this->generateUrl('bo_update_post', array('id' => $id)),
+	        'method' => 'PUT',
+            'update' => true
     	));
 
         return $this->render('BackEndBundle:Post:show.html.twig', array(
@@ -63,12 +63,16 @@ class PostController extends Controller
 
         	if ($form->isSubmitted() && $form->isValid()) {
 
-        		// $image = $post->getImage();
-        		// $imageName = $this->get('app.image_uploader')->upload($image);
-	         //    $post->setImage($imageName);
-        		//var_dump($post->getImage());die();
+                if(!$request->request->get('publish')) {
+                    $post->setIsPublished(false); //the post is published by default 
+                }
+                
 	        	$em->persist($post);
 	        	$em->flush();
+
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('success', 'Your post has been created !');
 
 	        	return $this->redirectToRoute('bo_show_post', array('id' => $post->getId()));
         	}
@@ -97,18 +101,38 @@ class PostController extends Controller
 			);
 		}
 
-        $form = $this->createForm(new PostType(), $post);
-        //$form->handleRequest($request);
-		$form->submit($request->request->get($form->getName()));
+        $current_img = $post->getImage()->getFileName();
 
-        if ($form->isSubmitted()) {	
-        	if ($form->isValid()) {
-        		$em->persist($post);
-            	$em->flush();
+        $form = $this->createForm(PostType::class, $post, array(
+            'action' => $this->generateUrl('bo_update_post', array('id' => $id)),
+            'method' => 'PUT',
+            'update' => true
+        ));
 
-            	return $this->redirectToRoute('bo_show_post', array('id' => $id));
-        	}
+        $form->handleRequest($request);
+
+        // if image NOT updated set current one
+        if (!$post->getImage()){
+            $post->setImage($current_img);
         }
+
+        if ($form->isSubmitted()) {
+            if($request->request->get('publish')) {
+                $post->setIsPublished(true);
+            }
+            else {
+                $post->setIsPublished(false);
+            }
+
+            $em->flush();
+
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Your post has been updated !');
+
+            return $this->redirectToRoute('bo_show_post', array('id' => $id));
+        }
+
     }
 
     /**
@@ -131,6 +155,9 @@ class PostController extends Controller
 
     	$em->remove($post);
 		$em->flush();
+
+        // redirect to the "bo_index" route if DELETE Ok
+        return $this->redirectToRoute('bo_index');
     }
 
 }
