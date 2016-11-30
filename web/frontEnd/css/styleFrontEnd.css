@@ -367,6 +367,7 @@ span.glyphicon.glyphicon-user {
 
 .blocConnection {
     margin-top: 6%;
+    margin-bottom: 10%;
     background-color: #fff;
     min-height: 400px;
     padding-top: 2%;
@@ -399,4 +400,20 @@ span.glyphicon.glyphicon-user {
 .btn, .btn-success {
     background-color: #ff4081;
     margin-top: 11%;
+}
+
+.imgConnect{
+    width:160px;
+    height:140px;
+    margin-left: 18%;
+}
+
+.titleConnect {
+    text-align: center;
+    margin-bottom: 11%;
+    font-family: monospace;
+}
+
+.labelConnect {
+    font-family: monospace;
 }
