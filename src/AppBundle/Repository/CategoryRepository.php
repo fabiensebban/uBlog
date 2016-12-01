@@ -20,6 +20,7 @@ class CategoryRepository extends EntityRepository
                     ->leftJoin('c.posts', 'p')
                     ->where('p.isPublished = true')
                     ->andWhere('p.isApproved = true')
+                    ->orderBy('p.created', 'DESC')
                     ->getQuery()
                     ->getResult();
 

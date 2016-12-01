@@ -15,12 +15,24 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     {
 
         return $this->createQueryBuilder('p')
-            ->where('p.isPublished = true')
-            ->andWhere('p.isApproved = true')
-            ->andWhere('p.category = :id_category')
-            ->setParameter('id_category', $id_category)
-            ->getQuery()
-            ->getResult();
+                    ->where('p.isPublished = true')
+                    ->andWhere('p.isApproved = true')
+                    ->andWhere('p.category = :id_category')
+                    ->setParameter('id_category', $id_category)
+                    ->orderBy('p.created', 'DESC')
+                    ->getQuery()
+                    ->getResult();
 
+    }
+
+    public function getPostByTag($tag_string)
+    {
+
+        return $this->createQueryBuilder('p')
+                    ->where('p.tags LIKE :tags')
+                    ->setParameter('tags', '%' . $tag_string . '%')
+                    ->orderBy('p.created', 'DESC')
+                    ->getQuery()
+                    ->getResult();
     }
 }

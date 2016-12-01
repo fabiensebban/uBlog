@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Post;
 use AppBundle\Form\Type\PostType;
@@ -108,4 +109,35 @@ class PostController extends Controller
             ));
     }
 
+    /**
+     * @Route(
+     *      "/search-by-tag",
+     *      name="search_by_tag"
+     * )
+     *  @Method({"POST"})
+     */
+    public function searchByTagAction(Request $request)
+    {
+        try {
+            $tag_string = $request->request->get('tags_string');
+
+            $em = $this->getDoctrine()->getManager();
+
+            $posts = $em->getRepository('AppBundle:Post')
+                        ->getPostByTag($tag_string);
+            $categories = $em->getRepository('AppBundle:Category')
+                ->getCategoriesWithPublicPost();
+
+            return $this->render('AppBundle:Post:listPost.html.twig', array(
+                    'allPosts' => $posts,
+                    'allCategory' => $categories,
+                    'tags' => $tag_string
+                ));
+        }
+        catch(Exception $e)
+        {
+            return $this->redirect('home');
+        }
+
+    }
 }

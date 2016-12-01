@@ -15,5 +15,6 @@ return array(
     'contact' => 'CONTACT',
     'close' => 'Close',
     'send_message' => 'Send message',
-    'my_profil' =>'My profil'
+    'my_profil' =>'My profil',
+    'tags_search' => 'Tags Search'
 );
