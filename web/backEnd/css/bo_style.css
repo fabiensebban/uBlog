@@ -1,6 +1,6 @@
 
 body {
-	background-color: #E9E1D6;
+	background-color: #FEFEFE;
 }
 
 nav.navbar {
@@ -63,7 +63,7 @@ ul.bo.list-group li {
 ul.bo.list-group li.active {
 	background-color: #94CEC1;
 	color: #FEFEFE;
-	border: 1px solid #DCDBD4;
+	border: 1px solid #94CEC1;
 	border-radius: 0;
 	height: 50px;
 	padding: 15px;
@@ -89,25 +89,24 @@ ul.bo.list-group li span.txt-span {
 }
 
 /** btn **/
-input.bo-primary-btn, button.bo-primary-btn {
+input.bo-primary-btn, button.bo-primary-btn, a.bo-primary-btn {
 	background-color: #249A84;
 	color: #FEFEFE;
 	border: 0;
 	border-radius: 2px;
 	padding: 10px 30px;
-	margin: 5px;
 	-webkit-transition : all 500ms ease-out;
 	-moz-transition : all 500ms ease-out;
 	-o-transition : all 500ms ease-out;
 	transition : all 500ms ease-out;	
 }
 
-input.bo-primary-btn:hover, button.bo-primary-btn:hover {
+input.bo-primary-btn:hover, button.bo-primary-btn:hover, a.bo-primary-btn:hover {
 	background-color: #94CEC1;
 	color: #FEFEFE;
 }
 
-input.bo-orange-btn, button.bo-orange-btn {
+input.bo-orange-btn, button.bo-orange-btn, a.bo-orange-btn:hover {
 	background-color: #F48A37;
 	color: #FEFEFE;
 	border: 0;
@@ -120,12 +119,12 @@ input.bo-orange-btn, button.bo-orange-btn {
 	transition : all 500ms ease-out;	
 }
 
-input.bo-orange-btn:hover, button.bo-orange-btn:hover {
+input.bo-orange-btn:hover, button.bo-orange-btn:hover, a.bo-orange-btn:hover {
 	background-color: #F3C863;
 	color: #FEFEFE;
 }
 
-input.bo-red-btn, button.bo-red-btn {
+input.bo-red-btn, button.bo-red-btn , a.bo-red-btn {
 	background-color: #CE202D;
 	color: #FEFEFE;
 	border: 0;
@@ -137,7 +136,7 @@ input.bo-red-btn, button.bo-red-btn {
 	transition : all 500ms ease-out;	
 }
 
-input.bo-red-btn:hover, button.bo-red-btn:hover {
+input.bo-red-btn:hover, button.bo-red-btn:hover, a.bo-red-btn:hover {
 	background-color: #E06064;
 	color: #FEFEFE;
 }
@@ -147,7 +146,7 @@ select.category-input {
 	height: 40px;
 	border-radius: 2px;
 	border: 1px solid #94CEC1;
-	background: #FEFEFE;
+	background-color: #FEFEFE;
 	color: #2A2B2B;	
 }
 
@@ -158,6 +157,63 @@ textarea.tags-input {
 	min-height: 100px;
 }
 
+/** bo index **/
+div.post-list-item {
+	background-color: #FEFEFE;
+	margin-bottom: 30px;
+	-webkit-transition : all 300ms ease-out;
+	-moz-transition : all 300ms ease-out;
+	-o-transition : all 300ms ease-out;
+	transition : all 300ms ease-out;
+	-webkit-box-shadow: 0px 0px 10px 2px rgba(220,219,212,1);
+	-moz-box-shadow: 0px 0px 10px 2px rgba(220,219,212,1);
+	box-shadow: 0px 0px 10px 2px rgba(220,219,212,1);
+}
+
+div.post-list-item:hover {
+	-webkit-box-shadow: 0px 0px 15px 5px rgba(220,219,212,1);
+	-moz-box-shadow: 0px 0px 15px 5px rgba(220,219,212,1);
+	box-shadow: 0px 0px 15px 5px rgba(220,219,212,1);
+}
+
+div.post-list-item .img {
+	height: 200px;
+}
+
+div.post-list-item .infos {
+	padding: 20px;
+}
+
+div.post-list-item p.title {
+	padding: 10px 0;
+	margin-bottom: 0;
+	color: #2A2B2B;
+}
+
+div.post-list-item p.extract {
+	font-size: 13px;
+	color: #A3A29F;
+}
+
+div.post-list-item .btn-div {
+	padding: 10px 20px;
+	border-top: 1px solid #DCDBD4;
+}
+
+div.post-list-item .btn-div a {
+	color: #249A84;
+	text-decoration: none;
+}
+
+div.post-list-item .date-span, div.post-list-item .stat-span {
+	font-size: 12px;
+	color: #DCDBD4;
+}
+
+div.post-list-item .stat-span {
+	padding: 4px 5px;
+}
+
 /** Helpers **/
 .red-bg {
 	background-color: #CE202D !important;
@@ -165,4 +221,12 @@ textarea.tags-input {
 
 .green-bg {
 	background-color: #249A84 !important;
+}
+
+.red-txt {
+	color: #CE202D !important;
+}
+
+.green-txt {
+	color: #249A84 !important;
 }
