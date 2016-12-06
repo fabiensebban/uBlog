@@ -20,6 +20,9 @@ class LocaleListener implements EventSubscriberInterface
         $request = $event->getRequest();
 
         //Define french if user's preferred language is french
+        $request->setLocale(strpos($request->getPreferredLanguage(), 'fr') === false ? $this->defaultLocale : 'fr' );
+
+        //Define locale in the session
         $request->getSession()->set('_locale', strpos($request->getPreferredLanguage(), 'fr') === false ? $this->defaultLocale : 'fr' );
 
     }
