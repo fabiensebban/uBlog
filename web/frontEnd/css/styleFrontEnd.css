@@ -365,3 +365,56 @@ span.glyphicon.glyphicon-user {
     font-size: 18px;
 }
 
+.blocConnection {
+    margin-top: 6%;
+    margin-bottom: 10%;
+    background-color: #2c3e50;
+    color:#fff;
+    min-height: 400px;
+    padding-top: 2%;
+    box-shadow: 0px 0px #ccc;
+}
+
+.blocLoginContent{
+    align-content: center;
+}
+
+.form-control {
+    margin-bottom: 5%;
+    border-bottom: 1px solid;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+.form-control:focus{
+    border-bottom: 1px #ff4081;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+.btn, .btn-success {
+    background-color: #ff4081;
+    margin-top: 11%;
+}
+
+.imgConnect{
+    width:160px;
+    height:140px;
+    margin-left: 18%;
+}
+
+.titleConnect {
+    text-align: center;
+    margin-bottom: 11%;
+    font-family: monospace;
+}
+
+.labelConnect {
+    font-family: monospace;
+}

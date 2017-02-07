@@ -7,4 +7,14 @@ return array(
     'new_post_title' => 'New Post',
     'post_title' => 'Title: ',
     'post_body' => 'Body: ',
+    'by' => 'By',
+    'postedOn' => 'Posted on ',
+    'blogCategories' => 'Blog categories',
+    'blogSearch' => 'Blog Search',
+    'about' => 'ABOUT',
+    'contact' => 'CONTACT',
+    'close' => 'Close',
+    'send_message' => 'Send message',
+    'my_profil' =>'My profil',
+    'tags_search' => 'Tags Search'
 );
