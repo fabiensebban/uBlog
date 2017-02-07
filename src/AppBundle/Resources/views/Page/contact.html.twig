@@ -10,18 +10,14 @@
                     <h1>Contact <span>us!</span></h1>
                 </div>
                 <div class="login-form">
-                    <form>
+                    <form action="{{ path('contact') }}" method="POST">
                         <div class="form-details">
-                            <label class="user">
-                                <input type="text" name="username" placeholder="Username" id="username">
+                            <label class="pass">
+                                <input type="text" name="object" placeholder="Object" id="object">
                             </label>
                             <label class="pass">
-                                <input type="text" name="email" placeholder="E-mail" id="email">
+                                <textarea type="text" name="message" placeholder="Message" id="message"></textarea>
                             </label>
-                            <label class="pass">
-                                <input type="text" name="objet" placeholder="Objet" id="objet">
-                            </label>
-
                         </div>
                         <button type="submit" class="form-btn" onsubmit="">Sent</button>
                     </form>

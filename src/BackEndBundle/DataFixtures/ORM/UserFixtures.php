@@ -29,6 +29,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface
         $user2->setEmail('fabien.seb@scarpa-team.com');
         $user2->setPlainPassword('pwd');
         $user2->setEnabled(true);
+        $user1->setRoles(array('ROLE_USER'));
         $manager->persist($user2);
 
         $manager->flush();
