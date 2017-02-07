@@ -1,0 +1,126 @@
+{# include base layout #}
+{% extends "BackEndBundle::base.html.twig" %}
+{# page title #}
+{% block title %}Manage categories{% endblock %}
+{# body content #}
+{% block body %}
+{# Flashbag container #}
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    	<div class="msg-container">
+	        {% if app.session.flashBag.has('success') %}
+	        <div class="alert alert-success">
+	            {% for msg in app.session.flashBag.get('success') %}
+	                {{ msg }}
+	            {% endfor %}
+	        </div>
+	    	{% elseif app.session.flashBag.has('danger') %}
+	    	<div class="alert alert-danger">
+	            {% for msg in app.session.flashBag.get('danger') %}
+	                {{ msg }}
+	            {% endfor %}
+	        </div>
+	    	{% endif %}
+    	</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <ul class="bo list-group">
+            <li class="list-group-item active text-uppercase">List of categories</li>
+        </ul>
+        <div class="cat-list">
+        	<ul class="list-group">
+				{% for cat in categories %}
+					<li class="list-group-item" id="item-{{cat.id}}">
+						<span class="badge red-bg">
+						<form action="{{ path('admin_delete_category', { 'id': cat.id }) }}" method="post">
+		                    <input type="hidden" name="_method" value="DELETE" />
+		                    <button type="submit">Delete</button>
+		                </form>
+						</span>
+						<span class="badge btn-edit" data-id="{{cat.id}}">Edit</span>
+						<span class="content">{{cat.displayName}}</span>
+					</li>
+					<li class="list-group-item input-container hidden" id="item-input-{{cat.id}}">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Category name" value="{{cat.displayName}}">
+							<span class="input-group-btn">
+								<button class="btn btn-default bo-primary-btn text-uppercase btn-ok" data-id="{{cat.id}}" data-url="{{path('admin_update_category', {'id': cat.id})}}" type="button">OK</button>
+								<button class="btn btn-default bo-primary-btn red-bg text-uppercase btn-cancel" type="button" data-id="{{cat.id}}">Cancel</button>
+							</span>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>
+        </div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <ul class="bo list-group">
+            <li class="list-group-item active text-uppercase">Create new</li>
+        </ul>
+        <div class="cat-new">
+        	<form action="{{path('admin_category_add')}}" method="POST">
+        		<input type="text" class="form-control" name="name" placeholder="Category name">
+        		<button class="btn btn-default bo-primary-btn text-uppercase btn-block" type="submit" name="add">Create</button>
+        	</form>
+        </div>
+	</div>
+</div>
+{% endblock %}
+{# js block #}
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.btn-edit').on('click', function(e) {
+            var cat_id = $(this).data('id');
+            //show input div & hide contents
+            $('#item-'+cat_id).addClass('hidden');
+            $('#item-input-'+cat_id).removeClass('hidden');
+            $('#item-input-'+cat_id+' input').focus().select()
+        });
+
+        $('.btn-cancel').on('click', function(e) {
+            var cat_id = $(this).data('id');
+            //reset edit
+            $('#item-input-'+cat_id+' input').val($('#item-'+cat_id+' span.content').html());
+            //hide input div & show contents
+            $('#item-input-'+cat_id).addClass('hidden');
+            $('#item-'+cat_id).removeClass('hidden');
+        });
+
+        $('.btn-ok').on('click', function(e) {
+            var cat_id = $(this).data('id');
+            var url = $(this).data('url');
+
+            var current = $('#item-'+cat_id+' span.content').html();
+            var ne_w = $('#item-input-'+cat_id+' input').val();
+
+            //if category edited
+            if (current !== ne_w) {
+            	var params = { name: ne_w };
+	            $.post(url, params, function(data) {
+	            	if(data.status) {
+	            		//reset edit
+	            		$('#item-'+cat_id+' span.content').html(ne_w);
+	            		//hide input div & show contents
+            			$('#item-input-'+cat_id).addClass('hidden');
+            			$('#item-'+cat_id).removeClass('hidden');
+	            	}
+	            	else {
+	            		var content = '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Verify category value !</div>';
+
+	            		$('.msg-container').html(content);
+	            	}
+	            });            	
+            }
+            else { //if user dont edit category
+        		//hide input div & show contents
+    			$('#item-input-'+cat_id).addClass('hidden');
+    			$('#item-'+cat_id).removeClass('hidden');
+            }
+        });
+    });
+</script>
+{% endblock %}

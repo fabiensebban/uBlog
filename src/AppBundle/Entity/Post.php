@@ -58,12 +58,12 @@ class Post
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $isPublished;
+    protected $isPublished = true;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $isApproved;
+    protected $isApproved = false;
 
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=false, separator="-")
@@ -80,7 +80,7 @@ class Post
      * @Assert\NotBlank(message="Please, upload the post image.")
      * @Assert\File(mimeTypes={ "image/png", "image/jpg", "image/jpeg" })
      */
-    private $image;
+    protected $image;
 
     /**
      * @ORM\Column(type="text")
