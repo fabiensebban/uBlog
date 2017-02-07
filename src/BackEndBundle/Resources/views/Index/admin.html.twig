@@ -1,0 +1,162 @@
+{# include base layout #}
+{% extends "BackEndBundle::base.html.twig" %}
+{# page title #}
+{% block title %}Admin space{% endblock %}
+{# body content #}
+{% block body %}
+{# Flashbag container #}
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    	<div class="msg-container">
+	        {% if app.session.flashBag.has('success') %}
+	        <div class="alert alert-success">
+	            {% for msg in app.session.flashBag.get('success') %}
+	                {{ msg }}
+	            {% endfor %}
+	        </div>
+	    	{% else if app.session.flashBag.has('danger') %}
+	    	<div class="alert alert-danger">
+	            {% for msg in app.session.flashBag.get('danger') %}
+	                {{ msg }}
+	            {% endfor %}
+	        </div>
+	    	{% endif %}
+    	</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <ul class="bo list-group">
+            <li class="list-group-item active text-uppercase">List of posts</li>
+        </ul>
+	</div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    	<!-- Nav tabs -->
+		<ul class="nav nav-tabs nav-justified" role="tablist">
+			<li role="presentation" class="active approuved">
+				<a href="#approuved" class="text-uppercase" aria-controls="approuved" role="tab" data-toggle="tab">
+					<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Approuved posts
+				</a>
+			</li>
+			<li role="presentation" class="not-approuved">
+				<a href="#not-approuved" class="text-uppercase" aria-controls="not-approuved" role="tab" data-toggle="tab">
+					<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Not approuved posts
+				</a>
+			</li>
+		</ul>
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane fade in active" id="approuved">
+				<div class="block">
+				{% for post in posts %}
+					{% if post.isApproved %}
+		            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		            	<div class="post-list-item">
+		            		<div class="img" style="background: url({{ asset(images_dir) }}{{post.image.fileName}});background-size: cover;">
+		            		</div>
+		            		<div class="infos">
+		            			<div class="stat">
+		            				<span class="date-span">
+		            					<span class="glyphicon glyphicon-time" aria-hidden="true"></span> 
+		            					{{ post.created|date("d/m/Y", false) }}
+		            				</span>
+		            				<span class="pull-right stat-span">
+		            					<span class="glyphicon glyphicon-certificate {% if post.isApproved %}green{% else %}red{% endif %}-txt" aria-hidden="true"></span>
+		            					{% if post.isApproved %}Approved {% else %}Not Approved {% endif %}
+		            				</span>
+		            				<span class="pull-right stat-span">
+		            					<span class="glyphicon glyphicon-certificate {% if post.isPublished %}green{% else %}red{% endif %}-txt" aria-hidden="true"></span>
+		            					{% if post.isPublished %}Published {% else %}Not Published {% endif %}
+		            				</span>
+		            			</div>
+		            			<p class="title">{{ post.title }}</p>
+		            			<p class="extract">{{ post.body|slice(0, 200) }}...</p>
+		            		</div>
+		            		<div class="btn-div">
+		            			<a href="{{ path('bo_show_post', {'id': post.id}) }}">Edit this post</a>
+		            			<span class="pull-right stat-span">
+		            				<div class="switch">
+										<input id="cmn-toggle-{{post.id}}" class="cmn-toggle cmn-toggle-round" type="checkbox" {% if post.isApproved %}checked="checked"{% endif %} url="{{path('admin_approve_post', {'id': post.id})}}">
+										<label for="cmn-toggle-{{post.id}}"></label>
+									</div>
+		            			</span>
+		            		</div>
+		            	</div>
+					</div>
+					{% endif %}
+				{% endfor %}
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="not-approuved">
+				<div class="block">
+				{% for post in posts %}
+					{% if not post.isApproved %}
+		            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		            	<div class="post-list-item">
+		            		<div class="img" style="background: url({{ asset(images_dir) }}{{post.image.fileName}});background-size: cover;">
+		            		</div>
+		            		<div class="infos">
+		            			<div class="stat">
+		            				<span class="date-span">
+		            					<span class="glyphicon glyphicon-time" aria-hidden="true"></span> 
+		            					{{ post.created|date("d/m/Y", false) }}
+		            				</span>
+		            				<span class="pull-right stat-span">
+		            					<span class="glyphicon glyphicon-certificate {% if post.isApproved %}green{% else %}red{% endif %}-txt" aria-hidden="true"></span>
+		            					{% if post.isApproved %}Approved {% else %}Not Approved {% endif %}
+		            				</span>
+		            				<span class="pull-right stat-span">
+		            					<span class="glyphicon glyphicon-certificate {% if post.isPublished %}green{% else %}red{% endif %}-txt" aria-hidden="true"></span>
+		            					{% if post.isPublished %}Published {% else %}Not Published {% endif %}
+		            				</span>
+		            			</div>
+		            			<p class="title">{{ post.title }}</p>
+		            			<p class="extract">{{ post.body|slice(0, 200) }}...</p>
+		            		</div>
+		            		<div class="btn-div">
+		            			<a href="{{ path('bo_show_post', {'id': post.id}) }}">Edit this post</a>
+		            			<span class="pull-right stat-span">
+		            				<div class="switch">
+										<input id="cmn-toggle-{{post.id}}" class="cmn-toggle cmn-toggle-round" type="checkbox" {% if post.isApproved %}checked="checked"{% endif %} url="{{path('admin_approve_post', {'id': post.id})}}">
+										<label for="cmn-toggle-{{post.id}}"></label>
+									</div>
+		            			</span>
+		            		</div>
+		            	</div>
+					</div>
+					{% endif %}
+				{% endfor %}
+				</div>
+			</div>
+		</div>
+		<!-- End Tabs -->
+    </div>
+</div>
+{% endblock %}
+{# js block #}
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.cmn-toggle').on('change', function(e) {
+            // prevents the browser from "following" the link
+            e.preventDefault();
+            var url = $(this).attr('url');
+
+            $.post(url, null, function(data) {
+            	if(data.status) {
+            		var content = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>The post has been approved</div>';
+            	}
+            	else {
+            		var content = '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>The post has been disapproved</div>';
+            	}
+
+            	$('.msg-container').html(content);
+            });
+        });
+    });
+</script>
+{% endblock %}
