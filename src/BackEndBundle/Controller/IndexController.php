@@ -20,8 +20,8 @@ class IndexController extends Controller
     	$userId = 1;
     	$em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository('AppBundle:Post')->getUserPosts($userId);
-        $recap = $em->getRepository('AppBundle:Post')->getUserPostsRecap($userId);
-        //dump($recap);die();
+        $recap = $em->getRepository('AppBundle:Post')->getPostsRecap($userId);
+
         return $this->render('BackEndBundle:Index:index.html.twig', array(
         	'posts'	=>	$posts,
         	'likes_count' => $recap['count_likes'],
