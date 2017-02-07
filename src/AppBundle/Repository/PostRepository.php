@@ -22,13 +22,14 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             		->getResult();
 	}
 
-	//get likes & shares count of user
-	public function getUserPostsRecap($userId)
+	//get hits & shares count
+	public function getPostsRecap($userId = null)
 	{
-		$query = "SELECT SUM(p.likes) AS count_likes, SUM(p.shares) AS count_shares  
-				  FROM AppBundle:Post p 
-				  WHERE p.author = ". $userId;
-		
+		$query = "SELECT SUM(p.likes) AS count_likes, SUM(p.shares) AS count_shares FROM AppBundle:Post p";
+			if ($userId) {
+				$query .= " WHERE p.author = ". $userId;
+			}
+				  
 		return $this->getEntityManager()
             		->createQuery($query)
             		->getSingleResult();
