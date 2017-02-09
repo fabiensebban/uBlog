@@ -6,6 +6,27 @@
 
     <div class="container">
 
+        {# Flashbag container #}
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="msg-container">
+                    {% if app.session.flashBag.has('success') %}
+                    <div class="alert alert-success">
+                        {% for msg in app.session.flashBag.get('success') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                    {% elseif app.session.flashBag.has('danger') %}
+                    <div class="alert alert-danger">
+                        {% for msg in app.session.flashBag.get('danger') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
         <div class="row">
 
             <div class="col-md-8 col-lg-8 blocPost">
@@ -22,7 +43,47 @@
                 <hr>
                 <p class="textPreview">{{ post.getBody()}}</p>
                 <hr>
-
+                <h4><a>Comments :</a></h4>
+                <hr>
+                <div class="comments-block">
+                    {% if comments %}
+                        {% for cmt in comments %}
+                        <div class="panel panel-white post panel-shadow">
+                            <div class="post-heading">
+                                <div class="pull-left image">
+                                    <img src="http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png" class="img-circle avatar" alt="user profile image">
+                                </div>
+                                <div class="pull-left meta">
+                                    <div class="title h5">
+                                        <a href="#"><b>{{ cmt.author.lastname }} {{ cmt.author.firstname }}</b></a>
+                                    </div>
+                                    <h6 class="text-muted time">{{ cmt.created|date('d-m-Y H:i:s')}}</h6>
+                                </div>
+                            </div> 
+                            <div class="post-description"> 
+                                <p>{{ cmt.content }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <h5>No comment !</h5>
+                    {% endif %}
+                    <hr>
+                        <h4><a>Leave a comment :</a></h4>
+                    <hr>
+                    {% if app.user %}
+                        
+                        <form action="{{path('comment_add')}}" method="POST">
+                            <textarea class="form-control" rows="5" name="cmt_content"></textarea>
+                            <input type="hidden" name="post_id" value="{{ post.id }}">
+                            <button class="btn btn-default bo-primary-btn text-uppercase pull-right" type="submit" name="add">
+                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Send
+                            </button>
+                        </form>
+                    {% else %}
+                    # user is not logged in
+                    {% endif %}
+                </div>
             </div>
 
             <div class="col-md-4">

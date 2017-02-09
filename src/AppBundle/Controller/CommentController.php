@@ -5,6 +5,9 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Comment;
+
 
 /**
  * Class CommentController
@@ -15,36 +18,51 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class CommentController extends Controller
 {
     /**
-     * @Route("/comment/create")
+     * @Route("/comment/create", name="comment_add")
      * @Method({"POST"})
      */
-    public function createAction()
-    {
-        return $this->render('AppBundle:Comment:create.html.twig', array(
-            // ...
-        ));
-    }
+    public function createAction(Request $request)
+    {   
+        //check if post exist
+        $post_id = (int)$request->request->get('post_id');
 
-    /**
-     * @Route("/comment/{id}/like")
-     * @Method({"POST"})
-     */
-    public function likeAction($id)
-    {
-        return $this->render('AppBundle:Comment:like.html.twig', array(
-            // ...
-        ));
-    }
+        $em = $this->getDoctrine()->getManager();
+        // Check if post exist
+        if (!$post = $em->getRepository('AppBundle:Post')->findOneById($post_id)) {
+            throw new NotFoundHttpException(
+                $this->get('translator')->trans('This post does not exist.')
+            );
+        }
 
-    /**
-     * @Route("/comment/{id}/share")
-     * @Method({"POST"})
-     */
-    public function shareAction($id)
-    {
-        return $this->render('AppBundle:Comment:share.html.twig', array(
-            // ...
-        ));
+        $user = $this->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+        $cmt = new Comment();
+
+        if ($content = $request->request->get('cmt_content')) {
+        
+            $cmt->setContent($content);
+            $cmt->setAuthor($user);
+            $cmt->setLikes(1);
+
+            $current_img = $post->getImage()->getFileName();
+            $post->setImage($current_img);
+            $cmt->setPost($post);
+            
+            $em->persist($cmt);
+            $em->flush();
+
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'The comment has been added !');
+        }
+        else {
+            $request->getSession()
+                ->getFlashBag()
+                ->add('danger', 'The comment content is not valid !');
+        }
+
+        return $this->redirectToRoute('show_post', array('id' => $post->getId(), 'slug' => $post->getSlug()));
     }
 
 }
