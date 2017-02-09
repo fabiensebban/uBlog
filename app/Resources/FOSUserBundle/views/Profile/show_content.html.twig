@@ -11,7 +11,7 @@
                 <img class="img-responsive img-cover" src="{{ asset('frontEnd/images/profil.png') }}" alt="" style="margin: auto;">
                 <h3>{{ 'profile.show.username'|trans }}: {{ user.username }}</h3>
                 <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-                <p><a href="{{ path('backoffice') }}" class="btn btn-primary" role="button">{{ 'profile.show.go_to_bo'|trans }}</a></p>
+                <p><a href="{{ path('bo_index') }}" class="btn btn-primary" role="button">{{ 'profile.show.go_to_bo'|trans }}</a></p>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
     </div>
     {% if is_granted("ROLE_ADMIN") %}
         <div class="backoffice-btn">
-            <a href="{{ path('backoffice') }}">
+            <a href="{{ path('admin_posts_list') }}">
                 <i class="material-icons">settings</i>
             </a>
         </div>

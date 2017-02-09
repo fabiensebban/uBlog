@@ -11,6 +11,12 @@ header {
     margin-top: 12%;
 }
 
+.flash-success {
+    display: block;
+    margin-top: 20px;
+    background-color: green;
+}
+
 .blockLogin {
     margin-bottom: 3%;
     border: 1px solid #eee;
@@ -153,6 +159,25 @@ span.glyphicon.glyphicon-user {
     max-width: 550px;
 }
 
+.login-form textarea {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border-color: -moz-use-text-color -moz-use-text-color #d4d9e3;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    font-size: 13px;
+    font-weight: 300;
+    width: 100%;
+    color: #8492af;
+    padding: 15px 50px;
+    font-size: 17px;
+    max-width: 550px;
+}
+
 .login-form label {
     margin-bottom: 30px;
     width: 100%;
@@ -163,6 +188,10 @@ span.glyphicon.glyphicon-user {
 }
 
 .pass input {
+    background: rgba(0, 0, 0, 0) url("http://jskrishna.com/work/merkury/images/password.png") no-repeat scroll 7px 12px;
+}
+
+.pass textarea {
     background: rgba(0, 0, 0, 0) url("http://jskrishna.com/work/merkury/images/password.png") no-repeat scroll 7px 12px;
 }
 
@@ -406,7 +435,6 @@ span.glyphicon.glyphicon-user {
 .imgConnect{
     width:160px;
     height:140px;
-    margin-left: 18%;
 }
 
 .titleConnect {

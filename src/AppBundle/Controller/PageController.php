@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Swift_Message;
 
 /**
  * Class CommentController
@@ -53,16 +54,22 @@ class PageController extends Controller
      * @Route(
      *      "/contact",
      *      name="contact")
-     * @Method({"GET"})
      */
     public function contactAction()
     {
         $request = $this->container->get('request');
-        $routeName = $request->get('_route');
 
-        return $this->render('AppBundle:Page:contact.html.twig', array(
-            'routeName' => $routeName
-        ));
+        if ($this->getRequest()->isMethod('POST'))
+        {
+            $this->sendMail($this->getUser()->getEmail(),$request->request->get('object'),$request->request->get('message'));
+        }
+
+
+        return $this->render(
+            'AppBundle:Page:contact.html.twig', array(
+                'routeName' => ''
+            )
+        );
     }
 
     /**
@@ -93,5 +100,16 @@ class PageController extends Controller
             'detailsPost' => $resultPost,
             'allCategory' => $resultCategory
         ));
+    }
+
+    private function sendMail($from, $object, $messageToSend)
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject($object)
+            ->setFrom($from)
+            ->setTo('scarpa.zend@gmail.com')
+            ->setBody($messageToSend);
+
+        $this->get('mailer')->send($message);
     }
 }
