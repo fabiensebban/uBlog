@@ -33,10 +33,7 @@ class PostController extends Controller
         if (!$post) {
             throw $this->createNotFoundException('Unable to find post.');
         }
-/*
-        $comments = $em->getRepository('AppBundle:Comment')
-                        ->getCommentsForBlog($post->getId());
-*/
+
         $categories = $this->getDoctrine()
             ->getRepository("AppBundle:Category")
             ->findAll();
@@ -44,7 +41,7 @@ class PostController extends Controller
         return $this->render('AppBundle:Post:show.html.twig', array(
                 'post'          => $post,
                 'allCategories' => $categories,
-                //'comments'  => $comments
+                'comments'  => $post->getComments()->getValues()
             ));
     }
 

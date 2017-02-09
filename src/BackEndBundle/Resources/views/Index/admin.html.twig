@@ -14,7 +14,7 @@
 	                {{ msg }}
 	            {% endfor %}
 	        </div>
-	    	{% else if app.session.flashBag.has('danger') %}
+	    	{% elseif app.session.flashBag.has('danger') %}
 	    	<div class="alert alert-danger">
 	            {% for msg in app.session.flashBag.get('danger') %}
 	                {{ msg }}
@@ -28,7 +28,11 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <ul class="bo list-group">
-            <li class="list-group-item active text-uppercase">List of posts</li>
+            <li class="list-group-item active text-uppercase">List of posts
+            <span class="badge">
+            	<a href="{{path('admin_categories')}}">Manage categories</a>
+            </span>
+            </li>
         </ul>
 	</div>
 </div>
